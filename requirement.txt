@@ -1,0 +1,12 @@
+click==7.1.2
+decorator==5.0.7
+Flask==1.1.2
+Flask-SQLAlchemy==2.5.1
+greenlet==1.1.0
+itsdangerous==1.1.0
+Jinja2==2.11.3
+MarkupSafe==1.1.1
+six==1.16.0
+SQLAlchemy==1.4.14
+validators==0.18.2
+Werkzeug==1.0.1
