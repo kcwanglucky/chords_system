@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header1 %}
+    <h1>{% block title %} All artist {% endblock %}</h1>
+{% endblock %}
+
+{% block content1 %}
+    {% for artist in artists %}
+        <header>
+            <h1><a href="{{ url_for('display.query', artist=artist[0]) }}"> {{ artist[0] }} </a></h1>
+        </header>
+
+        {% if not loop.last %}
+        <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

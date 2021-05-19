@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
 
 {% block header1 %}
-    <h1>Functions</h1>
+    {% if query == False %}
+        <h1>Functions</h1>
+    {% endif %}
 {% endblock %}
 
 {% block content1 %}
-<header>
-    <a class="action" href="{{ url_for('song_display.index') }}">Sort by artist</a>
-</header>
+    {% if not query %}
+        <header>
+            <a class="action" href="{{ url_for('display.query') }}">Criteria Search</a>
+        </header>
+        <header>
+            <a class="action" href="{{ url_for('display.artist') }}">Display all singers</a>
+        </header>
+    {% endif %}
 {% endblock %}
 
 {% block header2 %}
-    <h1>{% block title %}Songs{% endblock %}</h1>
+    <h1>{% block title %}
+        {% if query == False %}
+            Songs
+        {% else %}
+            {% if chords %}
+                Query Results of "{{ query }}"
+            {% endif %}
+        {% endif %}
+    {% endblock %}</h1>
     {% if g.user %}
-        <a class="action" href="{{ url_for('song_display.add_chords') }}">New</a>
+        <a class="action" href="{{ url_for('display.add_chords') }}">Add New Song</a>
     {% endif %}
 {% endblock %}
 
@@ -23,7 +38,9 @@
         <header>
             <div>
                 <h1><a href="{{ chord.url }}" target="_blank"> {{ chord.name }} </a></h1>
-                <a class="action" href="{{ url_for('song_display.update', name=chord.name) }}">Edit</a>
+                {% if g.user %}
+                <a class="action" href="{{ url_for('display.update', name=chord.name) }}">Edit</a>
+                {% endif %}
                 {% if chord.artist %}
                     <div class="about">by {{ chord.artist }}</div>
                 {% endif %}
