@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 
-from chords import auth, song_display
+from chords import auth, display
 from chords.db_models import db
 
 def create_app(test_config=None):
@@ -35,7 +35,7 @@ def create_app(test_config=None):
         db.session.commit()
 
         app.register_blueprint(auth.bp)
-        app.register_blueprint(song_display.bp)
+        app.register_blueprint(display.bp)
 
         return app
 
