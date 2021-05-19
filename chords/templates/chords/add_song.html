@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header2 %}
+    <h1>{% block title %}Add new song{% endblock %}</h1>
+    <a href="{{ url_for('song_display.index') }}"> Back </a>
+{% endblock %}
+
+{% block content2 %}
+    <form method="post">
+        <label for="title">Name</label>
+        <input name="name" id="name" value="{{ request.form['name'] }}" required>
+        <br />
+
+        <label for="url">URL</label>
+        <input name="url" id="url" value="{{ request.form['url'] }}" required>
+        <br />
+
+        <label for="title">Key</label>
+        <input name="key" id="key" value="{{ request.form['key'] }}" required>
+        <br />
+
+        <label for="title">Artist</label>
+        <input name="artist" id="artist" value="{{ request.form['artist'] }}">
+        <br />
+
+        <!-- <label for="body">Body</label>
+        <textarea name="body" id="body">{{ request.form['body'] }}</textarea> -->
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

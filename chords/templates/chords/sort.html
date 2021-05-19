@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block header2 %}
+    <h1>{% block title %} Query Result {% endblock %}</h1>
+    <a href="{{ url_for('song_display.index') }}"> Back </a>
+{% endblock %}
+
+{% block content2 %}
+    <form method="post">
+        <label for="title">by Song Name</label>
+        <input name="name" id="name"
+        value="{{ request.form['name'] or chord.name }}">
+        <br />
+
+        <label for="title">by Artist</label>
+        <input name="artist" id="artist"
+        value="{{ request.form['artist'] or chord.artist }}">
+        <br />
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}
