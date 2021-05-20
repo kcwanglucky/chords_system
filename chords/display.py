@@ -90,10 +90,10 @@ def update(name):
 @bp.route('/query', methods=('GET', 'POST'))
 @bp.route('/<artist>/query')
 def query(artist = None):
-    chords = db.session.query(Chord).filter(
-        Chord.artist == artist
-    ).all()
-    if chords:
+    if artist:
+        chords = db.session.query(Chord).filter(
+            Chord.artist == artist
+        ).all()
         """
         If it is a query based on artist, then chords is not None.
         Can directly display the songs belonged to the provided artist
@@ -112,6 +112,7 @@ def query(artist = None):
         if error is not None:
             flash(error)
         else:
+            chords = None
             if name and artist:
                 chords = db.session.query(Chord).filter(
                     Chord.name == name,
