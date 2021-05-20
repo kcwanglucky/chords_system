@@ -48,7 +48,7 @@ def add_chords():
                 url = url,
                 key = key,
                 artist = artist,
-            )  # Create an instance of the User class
+            )
             db.session.add(new_song)  # Adds new User record to database
             db.session.commit()  # Commits all changes
 
