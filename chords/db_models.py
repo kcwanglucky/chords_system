@@ -20,8 +20,8 @@ class User(db.Model):
 class Chord(db.Model):
     # __tablename__ = 'chords'
 
-    name = Column(String(80), unique=True, nullable=False, primary_key=True)
-    url = Column(String(150), nullable=False, primary_key=True)
+    name = Column(String(80), nullable=False, primary_key=True)
+    url = Column(String(150), unique=True, nullable=False, primary_key=True)
     key = Column(String(10), nullable=False)
     artist = Column(String(80))
 
