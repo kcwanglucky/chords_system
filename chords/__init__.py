@@ -26,7 +26,7 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
     db.init_app(app)
 
     with app.app_context():
