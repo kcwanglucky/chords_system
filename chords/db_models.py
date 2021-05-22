@@ -1,14 +1,16 @@
 from sqlalchemy import Column, Integer, String
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 class User(db.Model):
     # __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     username = Column(String(80), unique=True, nullable=False)
-    password = Column(String(120), unique=True, nullable=False)
+    password = Column(String(120), nullable=False)
 
     def __init__(self, username=None, password=None):
         self.username = username
@@ -20,7 +22,7 @@ class User(db.Model):
 class Chord(db.Model):
     # __tablename__ = 'chords'
 
-    name = Column(String(80), nullable=False, primary_key=True)
+    name = Column(String(80), nullable=False)
     url = Column(String(150), unique=True, nullable=False, primary_key=True)
     key = Column(String(10), nullable=False)
     artist = Column(String(80))
