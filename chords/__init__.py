@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 from chords import auth, display
-from chords.db_models import db
+from chords.db_models import db, migrate
 
 def create_app(test_config=None):
     # create and configure the app
@@ -26,8 +26,10 @@ def create_app(test_config=None):
     except OSError:
         pass
     
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
     db.init_app(app)
+    migrate.init_app(app, db, render_as_batch=True)
 
     with app.app_context():
         # db.drop_all()
