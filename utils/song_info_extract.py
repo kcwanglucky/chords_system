@@ -46,6 +46,8 @@ def extract(input_file):
             # First line: Looking for name, key, artist
             line = line.split()
             if len(line) >= 3:
+                if line[0].isascii():
+                    continue
                 # info enough: Do not lack info
                 song = Song(line[0], line[1], line[2])
     
@@ -53,24 +55,24 @@ def extract(input_file):
 
 if __name__ == "__main__":
     songs = extract("entry.txt")
-    for song in songs:
-        print(song)
-        new_song = Chord(
-            name = song.name,
-            url = song.url,
-            key = song.key,
-            artist = song.artist,
-        )
-        engine = create_engine("sqlite:////tmp/test.db")
-        Session = sessionmaker(engine)
 
-        with Session() as session:
+    engine = create_engine("sqlite:////tmp/test.db")
+    Session = sessionmaker(engine)
+
+    with Session() as session:
+        for song in songs:
+            print(song)
+            new_song = Chord(
+                name = song.name,
+                url = song.url,
+                key = song.key,
+                artist = song.artist,
+            )
+        
             prev_add = session.query(Chord).filter(
                 Chord.url == new_song.url
             ).first()
 
             if not prev_add:
-                print(prev_add)
-                print("Add {}".format(new_song.name))
                 session.add(new_song)  # Adds new User record to database
                 session.commit()  # Commits all changes
