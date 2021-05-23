@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header1 %}
-    {% if query == False %}
+    {% if not query %}
         <h1>Functions</h1>
     {% endif %}
 {% endblock %}
@@ -18,21 +18,30 @@
 {% endblock %}
 
 {% block header2 %}
-    <h1>{% block title %}
-        {% if query == False %}
-            Songs
-        {% else %}
-            {% if chords %}
-                Query Results of "{{ query }}"
+    <h1>
+        {% block title %}
+            {% if not query %}
+                Songs
+            {% else %}
+                {% if chords %}
+                    Query Results of "{{ query }}"
+                {% else %}
+                    No matched for "{{ query }}"
+                {% endif %}
             {% endif %}
-        {% endif %}
-    {% endblock %}</h1>
+        {% endblock %}
+    </h1>
     {% if g.user %}
         <a class="action" href="{{ url_for('display.add_chords') }}">Add New Song</a>
     {% endif %}
 {% endblock %}
 
 {% block content2 %}
+    <h3>
+        {% if chords and query %}
+            {{ chords|length }} songs matched
+        {% endif %}
+    </h3>
     {% for chord in chords %}
         <article class="post">
         <header>
@@ -52,4 +61,10 @@
         <hr>
         {% endif %}
     {% endfor %}
+{% endblock %}
+
+{% block content3 %}
+    {% if query %}
+        <a class="action" href="{{ url_for('display.query') }}">Back</a>
+    {% endif %}
 {% endblock %}
