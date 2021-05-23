@@ -113,18 +113,21 @@ def query(artist = None):
             flash(error)
         else:
             chords = None
+            search_name = "%{}%".format(name)
+            search_art = "%{}%".format(artist)
+
             if name and artist:
                 chords = db.session.query(Chord).filter(
-                    Chord.name == name,
-                    Chord.artist == artist
+                    Chord.name.like(search_name),
+                    Chord.artist.like(search_art)
                 ).all()
             elif name:
                 chords = db.session.query(Chord).filter(
-                    Chord.name == name
+                    Chord.name.like(search_name)
                 ).all()
             elif artist:
                 chords = db.session.query(Chord).filter(
-                    Chord.artist == artist
+                    Chord.artist.like(search_art)
                 ).all()
             
             query = ""
