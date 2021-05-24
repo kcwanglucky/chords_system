@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content1 %}
-    {% for artist in artists %}
-        <header>
-            <h1><a href="{{ url_for('display.query', artist=artist[0]) }}"> {{ artist[0] }} </a></h1>
-        </header>
-
-        {% if not loop.last %}
-        <hr>
-        {% endif %}
+    {% for artist_row in artists | batch(3, None) %}
+        <div class="grid-container">
+            {% for artist in artist_row %}
+                <header>
+                    <h1><a href="{{ url_for('display.query', artist=artist[0]) }}"> {{ artist[0] }} </a></h1>
+                </header>
+            {% endfor %}
+        </div>
+        {% if not loop.last %}<hr>{% endif %}
     {% endfor %}
 {% endblock %}

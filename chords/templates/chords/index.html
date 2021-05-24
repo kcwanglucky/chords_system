@@ -42,21 +42,28 @@
             {{ chords|length }} songs matched
         {% endif %}
     </h3>
-    {% for chord in chords %}
-        <article class="post">
-        <header>
-            <div>
-                <h1><a href="{{ chord.url }}" target="_blank"> {{ chord.name }} </a></h1>
-                {% if g.user %}
-                <a class="action" href="{{ url_for('display.update', name=chord.name) }}">Edit</a>
+    {% for chord_row in chords | batch(3, None) %}
+        <div class="grid-container">
+            {% for chord in chord_row %}
+                {% if chord %}
+                    <article class="post">
+                    <header>
+                        <div>
+                            <h1><a href="{{ chord.url }}" target="_blank"> {{ chord.name }} </a></h1>
+                            {% if g.user %}
+                            <a class="action" href="{{ url_for('display.update', name=chord.name) }}">Edit</a>
+                            {% endif %}
+                            {% if chord.artist %}
+                                <div class="about">by {{ chord.artist }}</div>
+                            {% endif %}
+                            <div class="about">on key {{ chord.key }}</div>
+                        </div>
+                    </header>
+                    </article>
                 {% endif %}
-                {% if chord.artist %}
-                    <div class="about">by {{ chord.artist }}</div>
-                {% endif %}
-                <div class="about">on key {{ chord.key }}</div>
-            </div>
-        </header>
-        </article>
+            {% endfor %}
+        </div>
+
         {% if not loop.last %}
         <hr>
         {% endif %}
