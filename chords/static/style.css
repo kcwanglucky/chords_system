@@ -29,7 +29,7 @@ nav {
     background: lightgray;
     display: flex;
     align-items: center;
-    padding: 0 0.5rem;
+    padding: 0.3rem 0.5rem
 }
 
 nav h1 {
@@ -109,7 +109,7 @@ nav ul li a, nav ul li span, header .action {
 }
 
 .content form {
-    margin: 1em 0;
+    margin: 1em 0 0;
     display: flex;
     flex-direction: column;
 }
@@ -139,7 +139,7 @@ input[type=submit] {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 35% 35% 35%;
+    grid-template-columns: 33% 33% 33%;
     padding: 5px;
 }
 
@@ -149,13 +149,13 @@ input[type=submit] {
 }
 
 .back-section a {
-    padding: 10pt
+    padding: 0.5rem;
 }
 
 .function-button {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
 }
 
 .function-button a {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.5rem;
 }

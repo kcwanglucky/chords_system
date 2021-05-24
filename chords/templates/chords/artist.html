@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block header1 %}
-    <h1>{% block title %} All artist {% endblock %}</h1>
+    <header>
+        <h1>{% block title %} All artist {% endblock %}</h1>
+        <a class="action" href="{{ url_for('display.index') }}"> Back </a>
+    </header>
 {% endblock %}
 
 {% block content1 %}
     {% for artist_row in artists | batch(3, None) %}
         <div class="grid-container">
             {% for artist in artist_row %}
-                <header>
-                    <h1><a href="{{ url_for('display.query', artist=artist[0]) }}"> {{ artist[0] }} </a></h1>
-                </header>
+                <h1><a href="{{ url_for('display.query', artist=artist[0]) }}"> {{ artist[0] }} </a></h1>
             {% endfor %}
         </div>
         {% if not loop.last %}<hr>{% endif %}

@@ -2,7 +2,9 @@
 
 {% block header1 %}
     {% if not query %}
-        <h1>Functions</h1>
+        <header>
+            <h1>Functions</h1>
+        </header>
     {% endif %}
 {% endblock %}
 
@@ -16,22 +18,24 @@
 {% endblock %}
 
 {% block header2 %}
-    <h1>
-        {% block title %}
-            {% if not query %}
-                Songs
-            {% else %}
-                {% if chords %}
-                    Query Results of "{{ query }}"
+    <header>
+        <h1>
+            {% block title %}
+                {% if not query %}
+                    Songs
                 {% else %}
-                    No matched for "{{ query }}"
+                    {% if chords %}
+                        Query Results of "{{ query }}"
+                    {% else %}
+                        No matched for "{{ query }}"
+                    {% endif %}
                 {% endif %}
-            {% endif %}
-        {% endblock %}
-    </h1>
-    {% if g.user %}
-        <a class="action" href="{{ url_for('display.add_chords') }}">Add New Song</a>
-    {% endif %}
+            {% endblock %}
+        </h1>
+        {% if g.user and not query%}
+            <a class="action" href="{{ url_for('display.add_chords') }}">Add New Song</a>
+        {% endif %}
+    </header>
 {% endblock %}
 
 {% block content2 %}
@@ -69,10 +73,10 @@
 {% endblock %}
 
 {% block content3 %}
-    <div class="back-section">
-        {% if query %}
+    {% if query %}
+        <div class="back-section">
             <a class="action" href="{{ url_for('display.query') }}">Back</a>
             <a class="action" href="{{ url_for('display.index') }}">Home</a>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
 {% endblock %}
