@@ -8,12 +8,10 @@
 
 {% block content1 %}
     {% if not query %}
-        <header>
+        <div class="function-button">
             <a class="action" href="{{ url_for('display.query') }}">Criteria Search</a>
-        </header>
-        <header>
             <a class="action" href="{{ url_for('display.artist') }}">Display all singers</a>
-        </header>
+        </div>
     {% endif %}
 {% endblock %}
 
@@ -71,7 +69,10 @@
 {% endblock %}
 
 {% block content3 %}
-    {% if query %}
-        <a class="action" href="{{ url_for('display.query') }}">Back</a>
-    {% endif %}
+    <div class="back-section">
+        {% if query %}
+            <a class="action" href="{{ url_for('display.query') }}">Back</a>
+            <a class="action" href="{{ url_for('display.index') }}">Home</a>
+        {% endif %}
+    </div>
 {% endblock %}
