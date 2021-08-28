@@ -38,7 +38,7 @@ def create_app(test_config=None):
 
         app.register_blueprint(auth.bp)
         app.register_blueprint(display.bp)
-
+        
         return app
 
     # app.register_blueprint(auth.bp)
@@ -46,3 +46,8 @@ def create_app(test_config=None):
     # app.add_url_rule('/', endpoint='index')
 
     # return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.debug = True
+    app.run(host='0.0.0.0', port=4000)
