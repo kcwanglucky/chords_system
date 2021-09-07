@@ -1,9 +1,14 @@
 #!/usr/bin/python
 
 import sys
-sys.path.insert(0, "~/.local/lib/python2.7/site-packages/")
-from wsgiref.handlers import CGIHandler
-from chords import create_app
 
-app = create_app()
+from wsgiref.handlers import CGIHandler
+from chords import app
+
+path = "/home/kcwangluckychordmanager"
+
+if path not in sys.path:
+    sys.path.insert(0, path)
+    # sys.path.insert(0, "~/.local/lib/python2.7/site-packages")
+
 CGIHandler().run(app)
